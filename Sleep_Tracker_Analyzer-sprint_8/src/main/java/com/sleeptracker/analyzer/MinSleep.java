@@ -1,0 +1,15 @@
+package com.sleeptracker.analyzer;
+
+import com.sleeptracker.model.*;
+import java.util.List;
+
+public class MinSleep implements SleepAnalyzer {
+
+    public AnalysisResult apply(List<SleepSession> sleepSessions) {
+        long min = sleepSessions.stream()
+                .mapToLong(SleepSession::minutes)
+                .min()
+                .orElse(0);
+        return new AnalysisResult("Минимальная длительность сна (мин)", String.valueOf(min));
+    }
+}
